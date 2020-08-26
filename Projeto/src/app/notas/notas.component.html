@@ -1,1 +1,70 @@
-<p>notas works!</p>
+<div id='filtros'>
+    <form [formGroup]="form">
+        <label for="dataInicio">Data início da busca:</label>
+        <input type='date' id='dataInicio' formControlName="dataInicio" placeholder="DD-MM-AAAA" style='display: block;'>
+        <label for="dataFim">Data fim da busca:</label>
+        <input type='date' id='dataFim' formControlName="dataFim" placeholder="DD-MM-AAAA" style='display: block;'>
+    </form>
+</div>
+
+
+<div>
+    <button (click)="Buscar()">Buscar</button>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+
+    <!-- idNota Coluna -->
+    <ng-container matColumnDef="idNota">
+        <th mat-header-cell *matHeaderCellDef> Número </th>
+        <td mat-cell *matCellDef="let nota"> {{nota.idNota}} </td>
+    </ng-container>
+
+    <!-- dataEmissao Coluna -->
+    <ng-container matColumnDef="dataEmissao">
+        <th mat-header-cell *matHeaderCellDef> Data Emissão </th>
+        <td mat-cell *matCellDef="let nota"> {{nota.dataEmissao | date:'dd/MM/yyyy HH:mm:ss'}} </td>
+    </ng-container>
+
+    <!-- VMercadorias Coluna -->
+    <ng-container matColumnDef="VMercadorias">
+        <th mat-header-cell *matHeaderCellDef> Valor Mercadorias </th>
+        <td mat-cell *matCellDef="let nota"> {{nota.vMercadorias}} </td>
+    </ng-container>
+
+    <!-- VDesconto Coluna -->
+    <ng-container matColumnDef="VDesconto">
+        <th mat-header-cell *matHeaderCellDef> Valor Desconto </th>
+        <td mat-cell *matCellDef="let nota"> {{nota.vDesconto }} </td>
+    </ng-container>
+
+    <!-- VFrete Coluna -->
+    <ng-container matColumnDef="VFrete">
+        <th mat-header-cell *matHeaderCellDef> Valor Frete </th>
+        <td mat-cell *matCellDef="let nota"> {{nota.vFrete}} </td>
+    </ng-container>
+
+    <!-- Vtotal Coluna -->
+    <ng-container matColumnDef="Vtotal">
+        <th mat-header-cell *matHeaderCellDef> Total </th>
+        <td mat-cell *matCellDef="let nota"> {{nota.vtotal}} </td>
+    </ng-container>
+
+    <!-- Ação Coluna -->
+    <ng-container matColumnDef="Acao">
+        <th mat-header-cell *matHeaderCellDef>Visto/Aprovação</th>
+        <td mat-cell *matCellDef="let row">
+            <button (click)="Acao(row.idNota)">@</button>
+        </td>
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="Acao">
+        <mat-header-cell *matHeaderCellDef>
+            <button (click)="Acao()">Aprovar/Visto</button>
+        </mat-header-cell>
+    </ng-container> -->
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

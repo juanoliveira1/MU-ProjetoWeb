@@ -1,1 +1,24 @@
-<p>login works!</p>
+<div class="login">
+    <div class="heading">
+        <h2>Entrar</h2>
+        <form [formGroup]="form" action="#">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                <input formControlName="email" type="text" class="form-control" placeholder="Usuário">
+                <mat-error *ngIf="fbGroup.email.hasError('required') && !this.fbGroup.email.untouched">
+                    E-mail é obrigatório.
+                </mat-error>
+            </div>
+
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <input formControlName="senha" type="password" class="form-control" placeholder="Senha">
+                <mat-error *ngIf="fbGroup.senha.hasError('required') && !this.fbGroup.senha.untouched">
+                    Senha é obrigatória.
+                </mat-error>
+            </div>
+
+            <button (click)="Logar()" [disabled]="fbGroup.email.hasError('required') || fbGroup.senha.hasError('required')" class="float">Logar</button>
+        </form>
+    </div>
+</div>
